@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.nappi {
+  border-radius: 5px;
+  margin-left: 10px;
+  font-size: 13px;
+  background-color: chocolate;
+  color: yellow;
+}
