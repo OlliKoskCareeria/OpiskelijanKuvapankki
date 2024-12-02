@@ -39,7 +39,7 @@ const KategoriatLista = ({setViesti, setShowViesti}) => {
                 {lisäystila && <UusiKategoria setLisäystila={setLisäystila} setViesti={setViesti} setShowViesti={setShowViesti}/>}
                 {
                     showKategoriat && kategoriat && kategoriat.map(k => (
-                        <Kategoria setViesti={setViesti} setShowViesti={setShowViesti} reload={reload} reloadNow={reloadNow} key={k.kategoriaId} kategoria={k}/>
+                        <Kategoria setShowDetails={setShowDetails} showDetails={showDetails} setViesti={setViesti} setShowViesti={setShowViesti} reload={reload} reloadNow={reloadNow} key={k.kategoriaId} kategoria={k}/>
                         // <h3 Kategoria key={k.kategoriaId}>{k.kategoriaNimi}
                         // {showDetails && <Kategoria/>}</h3>
                         

@@ -3,10 +3,10 @@ import React, {useState} from 'react'
 import KategoriaService from './services/Kategoria'
 
 // props is named customer
-const Kategoria = ({kategoria, setViesti, setShowViesti, reload, reloadNow}) => {
+const Kategoria = ({kategoria, setViesti, setShowViesti, reload, reloadNow,showDetails,setShowDetails}) => {
 
 // component state definition
-const [showDetails, setShowDetails] = useState(false)
+
 
 const PoistaKategoria = (kategoria, setViesti, setShowViesti, reload, reloadNow)  => {
     let vastaus = window.confirm(`poista kategoria ${kategoria.kategoriaNimi}`)
