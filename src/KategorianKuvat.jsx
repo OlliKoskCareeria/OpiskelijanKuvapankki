@@ -3,12 +3,13 @@ import React, {useState, useEffect} from 'react'
 import KuvatService from './services/Kuvat'
 import KategoriaService from './services/Kategoria'
 import LatausButton from './KuvanLataus'
+import Etusivu from './Etusivu'
 
 const KategorianKuvat = () => {
 const [kategoriat, setKategoriat] = React.useState([]);
 const [kuvat, setKuvat] = React.useState([]);
 const [valittuKategoria, setValittuKategoria] = React.useState([]);
-
+const [showEtusivu, setShowEtusivu] = React.useState(true);
 useEffect(() => {
     KategoriaService.haeKaikki()
     .then(data => {
@@ -41,7 +42,7 @@ return (
         <nav>
             {kategoriat.map((kategoria) =>(
                 <button key={kategoria.kategoriaNimi} onClick={() => {
-                    
+                    setShowEtusivu(false);
                     setValittuKategoria(kategoria.kategoriaNimi);
                     kategorianValinta(kategoria.kategoriaNimi);
                 }}
@@ -55,8 +56,7 @@ return (
         </nav>
         
         <main>
-            <h3>Tämä sivusto sisältää ilmaisia kuvia.</h3>
-            <h3>Kuvat on julkaistu CC0 lisenssillä. Lue lisää.</h3><a href='https://creativecommons.org/publicdomain/zero/1.0/'>Creative Commons CC0</a>
+           {showEtusivu&&<Etusivu/>}
             <h2>{valittuKategoria}</h2>
             <div style={{display:"flex",
                         flexWrap:"wrap",
