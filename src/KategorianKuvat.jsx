@@ -3,13 +3,14 @@ import React, {useState, useEffect} from 'react'
 import KuvatService from './services/Kuvat'
 import KategoriaService from './services/Kategoria'
 import LatausButton from './KuvanLataus'
-import Etusivu from './Etusivu'
+
+
 
 const KategorianKuvat = () => {
 const [kategoriat, setKategoriat] = React.useState([]);
 const [kuvat, setKuvat] = React.useState([]);
 const [valittuKategoria, setValittuKategoria] = React.useState([]);
-const [showEtusivu, setShowEtusivu] = React.useState(true);
+
 useEffect(() => {
     KategoriaService.haeKaikki()
     .then(data => {
@@ -17,32 +18,45 @@ useEffect(() => {
     })
 },[]
 )
+// useEffect(() => {
+//     KuvatService.haeKategorianPerusteella("Sekalaiset")
+//     .then(data => {
+//       setKuvat(data)
+//     })
+// },[]
+// )
+useEffect(() => {
+    if (kategoriat.length > 0) {
+      KuvatService.haeKategorianPerusteella(kategoriat[0].kategoriaNimi)
+        .then(data => {
+          setKuvat(data);
+        })
+        .catch(error => {
+          console.error('Error fetching images:', error);
+        });
+    }
+  }, [kategoriat]);
 
 const kategorianValinta = (knimi) => {
     KuvatService.haeKategorianPerusteella(knimi)
     .then(data => { 
       setKuvat(data)
-      console.log(knimi)
+      
     
-      console.log(kuvat)
-      console.log(data)
+      
+      
     })
 };
 
-// useEffect(() => {
-//         kategorianValinta(kategoriaNimi);
-    
-    
-    
-// },[valittuKategoria]
-// )
+
 
 return (
     <div>
         <nav>
             {kategoriat.map((kategoria) =>(
+                
                 <button key={kategoria.kategoriaNimi} onClick={() => {
-                    setShowEtusivu(false);
+                    
                     setValittuKategoria(kategoria.kategoriaNimi);
                     kategorianValinta(kategoria.kategoriaNimi);
                 }}
@@ -56,7 +70,7 @@ return (
         </nav>
         
         <main>
-           {showEtusivu&&<Etusivu/>}
+           
             <h2>{valittuKategoria}</h2>
             <div style={{display:"flex",
                         flexWrap:"wrap",

@@ -2,69 +2,75 @@ import './App.css'
 import React, {useState} from 'react'
 import LoginService from './services/Auth'
 import md5 from 'md5'
+import { useNavigate } from 'react-router-dom';
+import Viesti from './Viesti';
 
-const Login = ({setViesti, setShowViesti, setLoggedInUser}) => {
+
+const Login = ({setViesti,viesti, setShowViesti, setLoggedInUser,loggedInUser,setLoggedAdmin}) => {
 
 // Komponentin tilan määritys
 const [kayttajatunnus, setKayttajatunnus] = useState('')
 const [ssana, setSsana] = useState('')
+const navigate = useNavigate();
 
 
-// onSubmit tapahtumankäsittelijä funktio
+
 const handleSubmit = (event) => {
       event.preventDefault()
       var userForAuth = {
         kayttajaTunnus: kayttajatunnus,
-        ssana: md5(ssana) // Salataan md5 kirjaston metodilla
+        ssana: md5(ssana) 
     }
-    console.log(userForAuth)
-    // Käytetään services/Auth.js tiedoston metodia
+    
     LoginService.authenticate(userForAuth)
     .then(response => {
       
         if (response.status == 200) {
           console.log("kirjautuminen ok:")
-          console.log(response)
-        // Talletetaan tietoja selaimen local storageen (f12 application välilehti)
+          
+          
         localStorage.setItem("kayttajaTunnus", response.data.kayttajaTunnus)
         localStorage.setItem("accesslevelId", response.data.accesslevelId)
+        localStorage.setItem("loginId", response.data.loginId)
         localStorage.setItem("token", response.data.token)
         
-        // Asetetaan app komponentissa olevaan stateen
         setLoggedInUser(response.data.kayttajaTunnus)
+        setLoggedAdmin(true)
+        setViesti("")
+        console.log(loggedInUser)
+        
 
-       setViesti(`Kirjautuneena: ${userForAuth.kayttajaTunnus}`)
        
-       setShowViesti(true)
-      
-       setTimeout(() => {
-        setShowViesti(false)
-       }, 5000)
-
+       
+      //  setShowViesti(true)
+      // setViesti("Kirjaudutaan!")
+      //  setTimeout(() => {
+      //   setShowViesti(false)
+      //  }, 5000)
+       navigate('/Etusivu');
     }
       })
       .catch(error => {
-        setViesti(error)
-        
+        setViesti("Käyttäjätunnus ja salasana eivät täsmää!")
+        console.log(viesti)
         setShowViesti(true)
-
-        setTimeout(() => {
-          setShowViesti(false)
-         }, 6000)
+        emptyFields()
+        //  navigate('/Login')
       })
     }
+    
 
     // Kenttien tyhjennys
     const emptyFields = () => {
-        setUsername("")
-        setPassword("")
+        setKayttajatunnus("")
+        setSsana("")
     } 
 
 
   return (
     <div id="loginWindow">
-       <h2>Login</h2>
-
+       <h2>Kirjaudu sisään</h2>
+      <Viesti viesti={viesti}></Viesti>
        <form onSubmit={handleSubmit}>
             <div>
                 <input type="text" value={kayttajatunnus} placeholder="Käyttäjätunnus"
@@ -78,7 +84,7 @@ const handleSubmit = (event) => {
          <input type='submit' value='Login' />
          <input type='button' value='Empty' onClick={() => emptyFields()} />
        </form>
-
+      
     </div>
   )
 }
