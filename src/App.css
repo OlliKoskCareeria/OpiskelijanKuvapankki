@@ -54,9 +54,10 @@
 .nappi {
   border-radius: 5px;
   margin-left: 10px;
+  margin-right: 10px;
   font-size: 13px;
-  background-color: chocolate;
-  color: yellow;
+  background-color: rgb(190, 185, 182);
+  color: rgb(12, 12, 11);
 }
 
 .img-container {
@@ -152,4 +153,39 @@ img:hover {
 
 .image-card:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.edit-form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+  align-items: center;
+}
+
+.edit-form label {
+  justify-self: start;
+}
+
+.edit-form input {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.edit-form button {
+  padding: 0.5em 1em;
+  color: white;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  grid-column:1 / span 2;
+}
+
+.edit-form button:hover {
+  background-color: #0056b3;
+}
+
+.hide-div{
+  display: none;
 }

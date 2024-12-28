@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import KategoriatLista from './KategoriatLista'
+import LoginsLista from './LoginsLista'
 import KuvatLista from './KuvatLista'
 import Viesti from './Viesti'
 import KategorianKuvat from './KategorianKuvat'
@@ -12,6 +13,7 @@ import Etusivu from './Etusivu'
 import CustomNavbar from './CustomNavbar'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Nav'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -58,15 +60,16 @@ useEffect(() => {
       <Navbar  bg="dark" variant="dark" style={{ borderRadius: '10px' }}>
         <Nav className="mr-auto">
             <Nav.Link href="/Etusivu">Etusivu</Nav.Link>
-            <Nav.Link href='/KategorianKuvat'>Kuvat</Nav.Link>
+            <Nav.Link href='/KategorianKuvat'>Selaa kuvia</Nav.Link>
+            {loggedAdmin&&<Nav.Link href='/LoginsLista'>Käyttäjät</Nav.Link>}
             {!loggedInUser&&<Nav.Link href='/Login'>Kirjaudu sisään</Nav.Link>}
             {loggedAdmin && <Nav.Link href='/KategoriatLista'>Kategoriat</Nav.Link>}
-            {loggedInUser&&<button onClick={() => logout()}>Logout</button>}
+            {loggedInUser&&<button className='nappi' onClick={() => logout()}>Kirjaudu ulos</button>}
         </Nav>
       </Navbar>
                     
   {loggedInUser&&<h6>Kirjautuneena {loggedInUser} </h6>}    
-    
+  {showViesti && <Viesti viesti={viesti}/>}
 
     <Routes>
 
@@ -85,6 +88,9 @@ useEffect(() => {
     <Route path="/KategoriatLista" element={<KategoriatLista setViesti={setViesti} setShowViesti={setShowViesti}
     setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} loggedAdmin={loggedAdmin}setLoggedAdmin={setLoggedAdmin}/>}/>
       
+      <Route path="/LoginsLista" element={<LoginsLista setViesti={setViesti} setShowViesti={setShowViesti}
+    setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} loggedAdmin={loggedAdmin}setLoggedAdmin={setLoggedAdmin}/>}/>
+
       </Routes>
   </Router>
 }
