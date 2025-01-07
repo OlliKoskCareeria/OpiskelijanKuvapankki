@@ -16,6 +16,7 @@ import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Nav'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import OmaSivu from './OmaSivu'
 
 const App = () => {
 
@@ -61,6 +62,7 @@ useEffect(() => {
         <Nav className="mr-auto">
             <Nav.Link href="/Etusivu">Etusivu</Nav.Link>
             <Nav.Link href='/KategorianKuvat'>Selaa kuvia</Nav.Link>
+            {loggedInUser&&<Nav.Link href='/OmaSivu'>Omat sivut</Nav.Link>}
             {loggedAdmin&&<Nav.Link href='/LoginsLista'>Käyttäjät</Nav.Link>}
             {!loggedInUser&&<Nav.Link href='/Login'>Kirjaudu sisään</Nav.Link>}
             {loggedAdmin && <Nav.Link href='/KategoriatLista'>Kategoriat</Nav.Link>}
@@ -79,6 +81,9 @@ useEffect(() => {
 
     <Route path="/KategorianKuvat" element={<KategorianKuvat setViesti={setViesti} 
     setShowViesti={setShowViesti} loggedInUser={loggedInUser} />}/>
+
+    <Route path="/OmaSivu" element={loggedInUser&&<OmaSivu setViesti={setViesti} setShowViesti={setShowViesti}
+     loggedInUser={loggedInUser} loggedAdmin={loggedAdmin} />}/>
       
 
     <Route path="/Login" element={!loggedInUser&&<Login setViesti={setViesti} viesti={viesti} setShowViesti={setShowViesti}
