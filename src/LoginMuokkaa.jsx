@@ -2,11 +2,11 @@ import './App.css'
 import React, {useState} from 'react'
 import LoginService from './services/Login'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Form from 'react-bootstrap/Form';
+
 
 const LoginEdit = ({setMuokkaustila, setViesti, setShowViesti, muokattavaLogin}) => {
 
-// Component state definition
+
 const [newLoginId, setNewLoginId] = useState(muokattavaLogin.loginId)
 const [newKayttajaTunnus, setNewKayttajaTunnus] = useState(muokattavaLogin.kayttajaTunnus)
 const [newNimi, setNewNimi] = useState(muokattavaLogin.nimi)
@@ -29,7 +29,8 @@ const handleSubmit = (event) => {
     LoginService.muokkaaKayttajaa(newLogin)
     .then(response => {
       if (response.status === 200) {
-       setViesti("Muokattu tietoja" + newLogin.userName)
+        
+       setViesti("Muokattu tietoja " + newLogin.kayttajaTunnus)
        
        setShowViesti(true)
       

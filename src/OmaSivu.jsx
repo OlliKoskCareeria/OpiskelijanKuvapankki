@@ -11,7 +11,7 @@ const OmaSivu = ({setViesti,setShowViesti,loggedAdmin,loggedInUser}) => {
 
     return (
         <>
-            <OmatTiedot showOmatTiedot={showOmatTiedot} setShowOmatTiedot={setShowOmatTiedot} setViesti={setViesti} setShowViesti={setShowViesti} loggedInUser={loggedInUser} loggedAdmin={loggedAdmin}/>
+            {!showOmatKuvat && <OmatTiedot showOmatTiedot={showOmatTiedot} setShowOmatTiedot={setShowOmatTiedot} setViesti={setViesti} setShowViesti={setShowViesti} loggedInUser={loggedInUser} loggedAdmin={loggedAdmin}/>}
             
             <OmatKuvat showOmatKuvat={showOmatKuvat} setShowOmatKuvat={setShowOmatKuvat} setViesti={setViesti} setShowViesti={setShowViesti} loggedInUser={loggedInUser} loggedAdmin={loggedAdmin}/>
         </>

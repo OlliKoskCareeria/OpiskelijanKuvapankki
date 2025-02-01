@@ -31,6 +31,12 @@ const haeDetails = it => {
     return axios.get(`${baseUrl}/${it}`)
 }
 
+const haeKorkealuokkainenKuva = (ih) => {
+    const request = axios.get(`${baseUrl}/details/${ih}`)
+    console.log(request)
+    return request.then(response => response.data)
+}
+
 const haeKategorianPerusteella = (knimi) => {
     const request = axios.get(`${baseUrl}/KategoriaNimi/${knimi}`)
     console.log(request)
@@ -43,5 +49,16 @@ const haeKayttajanPerusteella = (ktunnus) => {
     return request.then(response => response.data)
 }
 
+const poista = id => {
+    const config = {
+        headers: { Authorization: token },
+     }
+    return axios.delete(`${baseUrl}/${id}`,config)
+}
 
-export default { haeKaikki, haeDetails, haeKategorianPerusteella, haeKayttajanPerusteella, LisaaUusi, setToken}
+const haeKuvanPolku = (id) => {
+    const request = axios.get(`${baseUrl}/Opiskelijankuvapankki/kuva/${id}`)
+    return request.then(response => response.data)
+}
+
+export default {haeKuvanPolku, haeKaikki, haeDetails, haeKategorianPerusteella, haeKayttajanPerusteella, LisaaUusi, setToken, poista, haeKorkealuokkainenKuva}

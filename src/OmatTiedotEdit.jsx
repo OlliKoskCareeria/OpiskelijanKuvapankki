@@ -5,13 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const OmatTiedotEdit = ({setMuokkaustila, setViesti, setShowViesti, muokattavaLogin}) => {
-
-    const [newLoginId, setNewLoginId] = useState(muokattavaLogin.loginId)
-    const [newKayttajaTunnus, setNewKayttajaTunnus] = useState(muokattavaLogin.kayttajaTunnus)
-    const [newNimi, setNewNimi] = useState(muokattavaLogin.nimi)
-    const [newYhteystieto, setNewYhteystieto] = useState(muokattavaLogin.yhteystieto)
-    const [newSsana, setNewSsana] = useState(muokattavaLogin.ssana)
+const OmatTiedotEdit = ({setMuokkaustila, setViesti, setShowViesti, muokattavaLogi}) => {
+console.log(muokattavaLogi)
+    const [newLoginId, setNewLoginId] = useState(muokattavaLogi.loginId)
+    const [newKayttajaTunnus, setNewKayttajaTunnus] = useState(muokattavaLogi.kayttajaTunnus)
+    const [newNimi, setNewNimi] = useState(muokattavaLogi.nimi)
+    const [newYhteystieto, setNewYhteystieto] = useState(muokattavaLogi.yhteystieto)
+    const [newSsana, setNewSsana] = useState(muokattavaLogi.ssana)
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -26,13 +26,13 @@ const OmatTiedotEdit = ({setMuokkaustila, setViesti, setShowViesti, muokattavaLo
       LoginService.muokkaaKayttajaa(newLogin)
           .then(response => {
             if (response.status === 200) {
-             setViesti("Muokattu tietoja" + newLogin.userName)
+             setViesti("Muokattu tietoja" + newLogin.kayttajaTunnus)
              
              setShowViesti(true)
             
              setTimeout(() => {
               setShowViesti(false)
-             }, 5000)
+             }, 6000)
       
              setMuokkaustila(false)
     }})
@@ -44,7 +44,7 @@ const OmatTiedotEdit = ({setMuokkaustila, setViesti, setShowViesti, muokattavaLo
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formLoginId">
             <Form.Label>LoginID</Form.Label>
-            <Form.Control type="number" value={newLoginId} disabled />
+            <Form.Control type="number" value={newLoginId} disabled/>
           </Form.Group>
   
           <Form.Group controlId="formNimi">
@@ -70,7 +70,7 @@ const OmatTiedotEdit = ({setMuokkaustila, setViesti, setShowViesti, muokattavaLo
   
           <Form.Group controlId="formKayttajaTunnus">
             <Form.Label>Käyttäjätunnus</Form.Label>
-            <Form.Control type="text" value={newKayttajaTunnus} disabled />
+            <Form.Control type="email" value={newKayttajaTunnus} />
           </Form.Group>
   
           <Form.Group controlId="formSalasana">
@@ -79,10 +79,10 @@ const OmatTiedotEdit = ({setMuokkaustila, setViesti, setShowViesti, muokattavaLo
           </Form.Group>
   
           <Button variant="primary" type="submit">
-            Save
+            Tallenna
           </Button>
           <Button variant="secondary" type="button" onClick={() => setMuokkaustila(false)}>
-            Back
+            Takaisin
           </Button>
         </Form>
       </div>

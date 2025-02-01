@@ -1,19 +1,24 @@
 import './App.css'
-import React, {useState} from 'react'
 import KategoriaService from './services/Kategoria'
+import React, {useEffect, useState} from 'react'
 
 
 
-const UusiKategoria = ({setLisäystila, setViesti, setShowViesti}) => {
+const UusiKategoria = ({setLisäystila, setViesti, setShowViesti,reloadNow}) => {
 
-// Komponentin state määritys
+
 
 
 const [newKategoriaNimi, setNewKategoriaNimi] = useState('')
 
+useEffect(() => {
+
+    const token = localStorage.getItem('token')
+        KategoriaService.setToken(token)
+    },[] 
+  );
 
 
-// onSubmit funktio
 const handleSubmit = (event) => {
       event.preventDefault()
       var newKategoria = {
@@ -33,6 +38,7 @@ const handleSubmit = (event) => {
        }, 5000)
 
        setLisäystila(false)
+       reloadNow(true)
     }
 
       

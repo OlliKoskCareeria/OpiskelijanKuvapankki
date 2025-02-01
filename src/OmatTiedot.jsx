@@ -2,23 +2,19 @@ import LoginService from './services/Login'
 import './App.css'
 import React, {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import OmatTiedotEdit from './OmatTiedotEdit';
 
 
-const OmatTiedot = ({setViesti,setShowViesti,loggedAdmin,loggedInUser,setShowOmatTiedot,showOmatTiedot}) => {
+const OmatTiedot = ({setViesti,setShowViesti,loggedInUser,setShowOmatTiedot,showOmatTiedot}) => {
 
-    const [login, setLogin] = useState([])
+    const [kayttaja, setKayttaja] = useState([])
     const [muokkaustila, setMuokkaustila] = useState(false)
     const [reload, reloadNow] = useState(false)
-    const [muokattavaLogin, setMuokattavaLogin] = useState(null)
+    const [muokattavaLogi, setMuokattavaLogi] = useState([])
 
-    const editLogins = (login) => {
-         setMuokattavaLogin(login)
-         setMuokkaustila(true)
-       }
+    
 
     useEffect(() => {
     
@@ -26,27 +22,44 @@ const OmatTiedot = ({setViesti,setShowViesti,loggedAdmin,loggedInUser,setShowOma
             LoginService
                 .setToken(token)
         
-        // setLogin(localStorag
-    
+
+                
+
       LoginService.HaeYksiKayttaja(localStorage.getItem('loginId'))
       .then(data => {
-        setLogin(data)
+        setKayttaja(data)
+        console.log(data)
+        console.log(kayttaja)
+        console.log(muokattavaLogi)
             })
-        },[reload, muokkaustila]
+        },[reload,muokkaustila,loggedInUser]
+
+        
+
+        
 
         
       )
+      
+
+      
+      const editLogins = (login) => {
+        
+        setMuokattavaLogi(login)
+        setMuokkaustila(true)
+    }
+      
     return (
         <div className='userDiv'>
-        {muokkaustila&&<OmatTiedotEdit muokattavaLogin={muokattavaLogin}setViesti={setViesti} setShowViesti={setShowViesti} loggedInUser={loggedInUser} loggedAdmin={loggedAdmin}></OmatTiedotEdit>}
+        {muokkaustila &&<OmatTiedotEdit setMuokkaustila={setMuokkaustila} muokattavaLogi={muokattavaLogi} setViesti={setViesti} setShowViesti={setShowViesti} loggedInUser={loggedInUser}></OmatTiedotEdit>}
         <h4 onClick={() => setShowOmatTiedot(!showOmatTiedot)}>
            Omat tiedot
         </h4>
 
        {showOmatTiedot && <div className="userDetails">
                 
-                <button onClick={() => deleteUser(login)}>Poista</button>
-                <button onClick={() => editLogins(muokattavaLogin)}>Muokkaa</button> 
+                <button onClick={() => deleteUser(kayttaja)}>Poista</button>
+                <button onClick={() => editLogins(kayttaja)}>Muokkaa</button> 
                 
                 <Table striped bordered hover>
                     <thead>
@@ -61,10 +74,10 @@ const OmatTiedot = ({setViesti,setShowViesti,loggedAdmin,loggedInUser,setShowOma
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{login.loginId}</td>
-                            <td>{login.kayttajaTunnus}</td>
-                            <td>{login.nimi}</td>
-                            <td>{login.yhteystieto}</td>
+                            <td>{kayttaja.loginId}</td>
+                            <td>{kayttaja.kayttajaTunnus}</td>
+                            <td>{kayttaja.nimi}</td>
+                            <td>{kayttaja.yhteystieto}</td>
                             
                             {/* <td>{user.passWord}</td> */}
                         </tr>

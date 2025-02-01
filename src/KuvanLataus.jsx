@@ -23,7 +23,7 @@ const LatausButton = ({id}) => {
         }
     };
 
-    return <button onClick={handleLataus}>Lataa kuva</button>;
+    return <button className="btn btn-secondary" style={{ marginRight: '10px' }} onClick={handleLataus}>Lataa kuva</button>;
 };
 
 export default LatausButton;

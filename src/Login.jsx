@@ -33,7 +33,7 @@ const handleSubmit = (event) => {
         localStorage.setItem("accesslevelId", response.data.accesslevelId)
         localStorage.setItem("loginId", response.data.loginId)
         localStorage.setItem("token", response.data.token)
-        
+        localStorage.setItem("nimi", response.data.nimi)
         setLoggedInUser(response.data.kayttajaTunnus)
         setLoggedAdmin(true)
         setViesti("")

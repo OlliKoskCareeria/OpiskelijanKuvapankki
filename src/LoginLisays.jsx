@@ -28,7 +28,8 @@ useEffect(() =>{
     setPasswordMessageColor('');
   } 
 },[newPassword, confirmPassword]);
-// onSubmit tapahtumankäsittelijä funktio
+
+
 const handleSubmit = (event) => {
       event.preventDefault()
       var newLogin = {
@@ -59,9 +60,10 @@ const handleSubmit = (event) => {
       })
       .catch(error => {
         console.log(error.response.data)
-        setViesti(error.response.data.message)//näytetään backendin viesti
+        setViesti(error.response.data.message)//näytetään backendin viesti backendin rutiinit suodattavat erilaiset virhetilanteet
         
         setShowViesti(true)
+        
 
         setTimeout(() => {
           setShowViesti(false)
