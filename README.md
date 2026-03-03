@@ -1,8 +1,22 @@
-# React + Vite
+# Opiskelijan Kuvapankki (Student Image Bank)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**A React frontend for an image bank application, built as a demonstration project during studies. The app communicates with an ASP.NET Core backend using Axios and JWT authentication.**
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Project Overview
+
+This project is a **React-based frontend** for an image bank, where users can:
+- **Sign up & log in** (JWT authentication)
+- **Upload, browse, and manage images**
+- **Interact with a RESTful ASP.NET Core backend**
+
+The project demonstrates:
+✅ React development (Vite, ES modules)
+✅ Secure API communication (Axios, JWT)
+✅ Responsive UI (Bootstrap, React-Bootstrap)
+✅ Code quality (ESLint, TypeScript types)
+
+---
+
+
