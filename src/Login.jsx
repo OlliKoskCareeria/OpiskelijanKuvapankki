@@ -37,7 +37,7 @@ const handleSubmit = (event) => {
         setLoggedInUser(response.data.kayttajaTunnus)
         setLoggedAdmin(true)
         setViesti("")
-        console.log(loggedInUser)
+        
         
 
        
@@ -70,7 +70,7 @@ const handleSubmit = (event) => {
   return (
     <div id="loginWindow">
        <h2>Kirjaudu sisään</h2>
-      <Viesti viesti={viesti}></Viesti>
+      {/* <Viesti viesti={viesti}></Viesti> */}
        <form onSubmit={handleSubmit}>
             <div>
                 <input type="text" value={kayttajatunnus} placeholder="Käyttäjätunnus"

@@ -18,16 +18,16 @@ const[imageSrc, setImageSrc] = useState(null)
                     setImageSrc("1")
                 })
             },[])
-            console.log(KuvatService.haeKorkealuokkainenKuva(id))
+            
         
 
         
    
         
         return(
-            <Modal show={show} onHide={onClose}>
+            <Modal show={show} onHide={onClose} size="lg" centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modaali{id}</Modal.Title>
+                    <Modal.Title></Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='justify-content-center align-items-center'>
             <div>

@@ -28,9 +28,8 @@ const OmatTiedot = ({setViesti,setShowViesti,loggedInUser,setShowOmatTiedot,show
       LoginService.HaeYksiKayttaja(localStorage.getItem('loginId'))
       .then(data => {
         setKayttaja(data)
-        console.log(data)
-        console.log(kayttaja)
-        console.log(muokattavaLogi)
+        
+        
             })
         },[reload,muokkaustila,loggedInUser]
 

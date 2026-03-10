@@ -2,11 +2,11 @@ import axios from "axios"
 
 const baseUrl = "https://localhost:7079/api/Kuvat"
 
-let token = null
+let token = null;
 
 
 const setToken = newToken => {token = `bearer ${newToken}`}
-
+console.log(token)
 const haeKaikki = () => {
     
     // const config = {

@@ -37,6 +37,7 @@ const handleSubmit = (event) => {
           nimi: newNimi,
           yhteystieto: newYhteystieto,
           ssana:md5(newPassword)
+          
       
         
     }
